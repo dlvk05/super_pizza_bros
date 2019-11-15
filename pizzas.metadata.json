@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"super_pizza_bros.pizzas"}],"uuid":"f056786cfc884fa8afc6faf07122c2b9"}
