@@ -1,0 +1,22 @@
+<% include partials/header %>
+
+<% cart.forEach( item=>{ %>
+    <div class="container ">
+        <div class="media ">
+            <img src="<%= item.image %>" class="mr-3 w-50" alt="..."  >
+            <div class="media-body">
+              <h5 class="mt-0"><%= item.name %></h5>
+              <% item.ingredients.forEach(ingredient=>{ %>
+                <button type="button" class="btn btn-light btn-sm rounded"><%= ingredient %></button>
+              <% }) %>
+              <p><%= item.size %></p>
+              <p><%= parseInt(item.price)*parseInt(item.quantity) %></p>
+              <p><%= item.quantity %></p>
+            </div>
+          </div>
+    </div>
+  <hr>
+
+  <% }) %>
+
+<% include partials/footer %>

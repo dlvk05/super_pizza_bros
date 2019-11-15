@@ -9,19 +9,13 @@ mongoose.set("useNewUrlParser", true);
 mongoose.set("useUnifiedTopology", true);
 
 
-
+var cartflag=0;
 var cart=[
-  {
-    name:String,
-    image:String,
-    ingredients:[],
-    size:String,
-    price:Number
-  }
 ];
 
-// ROUTES
+console.log(cart);
 
+// ROUTES
 app.get("/", (req, res) => {
   res.render("home");
 });
@@ -47,18 +41,38 @@ app.post("/cart/:id",(req,res)=>{
       }
       else{
         var temp={
-          name:foundPizza.name,
-          image:foundPizza.image,
-          ingredients:foundPizza.ingredients,
-          size: req.body.size,
-          price:parseInt(foundPizza.detail[req.body.size])
+          "name":foundPizza.name,
+          "ingredients":foundPizza.ingredients,
+          "size": req.body.size,
+          "price":parseInt(foundPizza.detail[req.body.size]),
+          "image":foundPizza.image,
+          "quantity":1
         };
-        cart.push(temp);
+        cart.forEach(item=>{
+          if(item.name==temp.name){
+            item.quantity=parseInt(item.quantity)+1;
+            // item.price=parseInt(item.price)*2;
+            cartflag=1;
+          }
+          else{
+            cartflag=0;
+          }
+        });
+        if(cartflag==0)
+        {
+          cart.push(temp);
+        }
         console.log(temp);
         res.redirect("/menu");
       }
     })
 })
+
+//GET CART
+app.get("/cart", (req, res) => {
+  res.render("cart",{cart:cart});
+});
+
 
 //GET ORDER FORM
 app.get("/orderForm", (req, res) => {
