@@ -32,6 +32,11 @@ app.get("/menu", (req, res) => {
   })
 });
 
+//GET CART
+app.get("/cart", (req, res) => {
+  res.render("cart",{cart:cart});
+});
+
 //Cart-add to cart
 app.post("/cart/:id",(req,res)=>{
     pizza.findById(req.params.id,(err,foundPizza)=>{
@@ -48,30 +53,63 @@ app.post("/cart/:id",(req,res)=>{
           "image":foundPizza.image,
           "quantity":1
         };
-        cart.forEach(item=>{
-          if(item.name==temp.name){
-            item.quantity=parseInt(item.quantity)+1;
+        var i=0;
+        for(i=0;i<cart.length;i++)
+        {
+          if((cart[i].name==temp.name)&&(cart[i].size==temp.size)){
+            cart[i].quantity=parseInt(cart[i].quantity)+1;
             // item.price=parseInt(item.price)*2;
             cartflag=1;
+            break;
           }
           else{
             cartflag=0;
           }
-        });
+        }
         if(cartflag==0)
         {
           cart.push(temp);
+          console.log(temp);
         }
-        console.log(temp);
+        
         res.redirect("/menu");
       }
     })
 })
 
-//GET CART
-app.get("/cart", (req, res) => {
-  res.render("cart",{cart:cart});
-});
+//DECREASE CART ITEM
+app.post("/cart/decrease/:name/:size",(req,res)=>{
+  var tname=req.params.name;
+    var tsize=req.params.size;
+    for(var i=0;i<cart.length;i++)
+    {
+      if((cart[i].name==tname)&&(cart[i].size==tsize))
+      {
+        cart[i].quantity=parseInt(cart[i].quantity)-1;
+        if(parseInt(cart[i].quantity)==0)
+        {
+          cart.splice(i,1)
+        }
+        break;
+      }
+    }
+    res.redirect("/cart");
+})
+
+//INCREASE CART ITEM
+app.post("/cart/increase/:name/:size",(req,res)=>{
+  var tname=req.params.name;
+    var tsize=req.params.size;
+    for(var i=0;i<cart.length;i++)
+    {
+      if((cart[i].name==tname)&&(cart[i].size==tsize))
+      {
+        cart[i].quantity=parseInt(cart[i].quantity)+1;
+        break;
+      }
+    }
+    res.redirect("/cart");
+})
 
 
 //GET ORDER FORM
