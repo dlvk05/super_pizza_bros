@@ -89,12 +89,24 @@
     <% }) %>
   </div>
   <div class="col-3 card border-success mb-1 sticky-top" style="max-width: 18rem; max-height: 20rem;">
-      <div class="card-header bg-transparent border-success">Header</div>
-      <div class="card-body text-success">
-        <h5 class="card-title">Success card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <div class="card-header bg-transparent border-success">Order Price Details</div>
+      <div class="container card-body text-success">
+        <div class="row">
+            <p class="card-title col">Subtotal</p>
+            <p class="card-title col"><%= subTotal %></p>
+        </div>
+        <div class="row">
+            <p class="card-text col">GST</p>
+            <p class="card-text col"><%= Math.floor(parseInt(subTotal*0.05)) %></p>
+        </div>
       </div>
-      <div class="card-footer bg-transparent border-success">Footer</div>
+      <div class="row">
+          <h5 class="col card-footer bg-transparent border-success text-success">Grand Total</h5>
+          <h5 class="col card-footer bg-transparent border-success"><%= grandTotal %></h5>
+      </div>
+      <div class="row">
+        <button class="col btn btn-success">Place Order</button>
+      </div>
     </div>
 </div>
 
