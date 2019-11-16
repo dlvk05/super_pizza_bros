@@ -1,4 +1,16 @@
-<% include partials/header %> <% if(cart.length==0){ %>
+<% include partials/header %> 
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Super Pizza Bros</a></li>
+          <li class="breadcrumb-item"><a href="#">Cart</a></li>
+          <!-- <li class="breadcrumb-item active" aria-current="page">Place Order</li> -->
+        </ol>
+      </nav>
+</div>
+
+<% if(cart.length==0){ %>
 <div class="container ">
   <img
     src="https://chillydraji.files.wordpress.com/2015/08/empty_cart.jpeg"
