@@ -71,8 +71,7 @@ app.post("/cart/:id",(req,res)=>{
           cart.push(temp);
           console.log(temp);
         }
-        
-        res.redirect("/menu");
+        // res.redirect("/menu");
       }
     })
 })
