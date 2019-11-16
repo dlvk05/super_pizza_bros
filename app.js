@@ -117,6 +117,22 @@ app.get("/orderForm", (req, res) => {
 });
 
 
+//GET ADD-PIZZA FORM
+app.get("/addPizza", (req, res) => {
+  res.render("addPizza");
+});
+
+
+//GET LOGIN FORM
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+//GET SIGNUP FORM
+app.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
 app.listen(3000, () => {
   console.log("server listening on port 3000");
 });

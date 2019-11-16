@@ -1,0 +1,55 @@
+<% include partials/header %>
+
+<div class="container">
+        <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Super Pizza Bros</a></li>
+                  <li class="breadcrumb-item"><a href="#">Admin Controls</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Add Order</li>
+                </ol>
+              </nav>
+    <h4 class="row mt-3">Enter Details of the New Pizza</h4>
+    <hr />
+    <form class="container">
+        <div class="row m-3">
+            <input
+              class="col form-control m-1"
+              type="text"
+              placeholder="Pizza Name"
+            />
+        </div>
+
+        <div class="row m-5">
+            <input type="text" name="" class="col-5 form-control mr-3" placeholder="Enter Ingredient" />
+            <button class="btn btn-primary">Add</button>
+        </div> 
+
+        <div class="row m-5">
+            <label class="col-1">Regular:</label>
+            <input type="text" class="col-3 form-control" placeholder="Enter Price for Regular" />
+        </div>    
+
+        <div class="row m-5">
+            <label class="col-1">Medium:</label>
+            <input type="text" class="col-3 form-control" placeholder="Enter Price for Medium" />
+        </div>   
+
+        <div class="row m-5">
+            <label class="col-1">Large:</label>
+            <input type="text" class="col-3 form-control" placeholder="Enter Price for Large" />
+        </div>
+
+        <div class="row m-5">
+            <label class="col">Enter Pizza Image Link:</label>
+            <input type="text" class="col-9 form-control" />
+        </div>
+        <hr />
+        <div class="row m-5">
+            <button class="btn btn-primary">Add New Pizza</button>
+        </div>
+
+    </form>
+</div>
+
+
+<% include partials/footer %>
