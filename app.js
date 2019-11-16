@@ -1,7 +1,8 @@
 var app = require("express")(),
   mongoose = require("mongoose"),
   bodyParser = require("body-parser"),
-  pizza= require("./models/pizza");
+  pizza= require("./models/pizza"),
+  order= require("./models/orderList");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -132,6 +133,40 @@ app.get("/orderForm", (req, res) => {
   res.render("orderForm");
 });
 
+//Place order
+app.post("/placeOrder",(req,res)=>{
+  var fname = req.body.firstName;
+  var lname = req.body.lastName;
+  var femail= req.body.email;
+  var fmobileNo=req.body.mobileNo;
+  var faddress=req.body.address;
+  var fpinCode=req.body.pin;
+  var fcart=cart;
+  var ftotal=grandTotal;
+  var newOrder={
+    firstName:fname,
+    lastName:lname,
+    email:femail,
+    mobileNo:fmobileNo,
+    address:faddress,
+    pinCode:fpinCode,
+    cart:fcart,
+    grandTotal:ftotal
+  };
+  order.create(newOrder,(err,savedOrder)=>{
+    if(err){
+      console.log(err)
+    }else{
+      console.log(savedOrder);
+      res.redirect("/invoice");
+    }
+  })
+})
+
+//GET INOICE
+app.get("/invoice", (req, res) => {
+  res.render("invoice");
+});
 
 //GET ADD-PIZZA FORM
 app.get("/addPizza", (req, res) => {
