@@ -8,6 +8,9 @@
           <!-- <li class="breadcrumb-item active" aria-current="page">Place Order</li> -->
         </ol>
       </nav>
+      <!-- <div class="row"> -->
+        <!-- <div class=""></div> -->
+      <!-- </div> -->
 </div>
 
 <% if(cart.length==0){ %>
@@ -24,7 +27,7 @@
 
   <!-- <h1><%= grandTotal %> </h1> -->
 <div class="row">
-  <div class="col-10">
+  <div class="col-9">
     <% cart.forEach( item=>{ %>
     <div class="container ">
       <div class="media mt-3 mr-5 mb-3 border border-dark">
@@ -85,6 +88,14 @@
     </div>
     <% }) %>
   </div>
+  <div class="col-3 card border-success mb-1 sticky-top" style="max-width: 18rem; max-height: 20rem;">
+      <div class="card-header bg-transparent border-success">Header</div>
+      <div class="card-body text-success">
+        <h5 class="card-title">Success card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
+      <div class="card-footer bg-transparent border-success">Footer</div>
+    </div>
 </div>
 
 <% } %> 
