@@ -1,22 +1,79 @@
-<% include partials/header %>
+<% include partials/header %> <% if(cart.length==0){ %>
+<div class="container ">
+  <img
+    src="https://chillydraji.files.wordpress.com/2015/08/empty_cart.jpeg"
+    alt=""
+    class="mx-auto d-block"
+  />
+  <h1 class="text-center">Cart is Empty!</h1>
+</div>
 
-<% cart.forEach( item=>{ %>
+<% } else { %>
+
+<div class="row">
+  <div class="col-10">
+    <% cart.forEach( item=>{ %>
     <div class="container ">
-        <div class="media ">
-            <img src="<%= item.image %>" class="mr-3 w-50" alt="..."  >
-            <div class="media-body">
-              <h5 class="mt-0"><%= item.name %></h5>
-              <% item.ingredients.forEach(ingredient=>{ %>
-                <button type="button" class="btn btn-light btn-sm rounded"><%= ingredient %></button>
-              <% }) %>
-              <p><%= item.size %></p>
-              <p><%= parseInt(item.price)*parseInt(item.quantity) %></p>
-              <p><%= item.quantity %></p>
+      <div class="media mt-3 mr-5 mb-3 border border-dark">
+        <img
+          src="<%= item.image %>"
+          class="align-self-center mr-3"
+          alt="..."
+          style="height: 30%; width: 27%;"
+        />
+        <div class="container">
+          <div class="media-body mt-2">
+            <div class="row">
+              <h5 class="mt-0 col-10"><%= item.name %></h5>
+              <p class="col-2  ">
+                <%= parseInt(item.price)*parseInt(item.quantity) %>
+              </p>
             </div>
+            <div class="row">
+              <div class="container pl-0 col-10">
+                <% item.ingredients.forEach(ingredient=>{ %>
+                <button type="button" class="btn btn-light btn-xs rounded">
+                  <%= ingredient %>
+                </button>
+                <% }) %>
+              </div>
+              <div class="col-2">
+                <!-- <p class="col-2"> -->
+                <!-- <span class="border border-dark rounded-pill p-0"> -->
+                <form
+                  action="/cart/decrease/<%= item.name %>/<%= item.size %>"
+                  method="post"
+                  class=""
+                >
+                  <button type="submit" class="border-0 p-0 bg-white">
+                    <i class="fas fa-minus "></i>
+                    <!-- border-right border-dark px-0  mr-2 ml-0 -->
+                  </button>
+                </form>
+                <span><%= item.quantity %></span>
+                <form
+                  action="/cart/increase/<%= item.name %>/<%= item.size %>"
+                  method="post"
+                  class=""
+                >
+                  <button type="submit" class="border-0 p-0 bg-white">
+                    <i class="fas fa-plus "></i>
+                    <!-- border-left border-dark p-0 ml-2 mr-0 -->
+                  </button>
+                </form>
+                <!-- </span> -->
+                <!-- </p> -->
+              </div>
+            </div>
+            <p style="text-transform: capitalize;"><%= item.size %></p>
           </div>
+        </div>
+      </div>
     </div>
-  <hr>
+    <% }) %>
+  </div>
+</div>
 
-  <% }) %>
+<% } %> 
 
 <% include partials/footer %>
