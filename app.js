@@ -15,6 +15,7 @@ var grandTotal;
 var subTotal;
 var cart=[
 ];
+var currentOrder=[];
 
 function total(){
   grandTotal=0;
@@ -157,15 +158,17 @@ app.post("/placeOrder",(req,res)=>{
     if(err){
       console.log(err)
     }else{
-      console.log(savedOrder);
+      // console.log(savedOrder);
+      currentOrder.push(savedOrder);
       res.redirect("/invoice");
     }
-  })
-})
+  });
+});
 
 //GET INOICE
 app.get("/invoice", (req, res) => {
-  res.render("invoice");
+  console.log(currentOrder[0]);
+  res.render("invoice",{order:currentOrder[0]});
 });
 
 //GET ADD-PIZZA FORM

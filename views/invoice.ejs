@@ -15,26 +15,39 @@
   </div>
 
   <div class="row">
-      <h5 class="col m-3">Customer Name:</h5>
-      <h5 class="col m-3">Customer Address:</h5>
+      <h5 class="col m-3">Customer Name:<%=order.firstName %> <%= order.lastName %></h5>
+      <h5 class="col m-3">Customer Address: <%= order.address %> </h5>
   </div>
   <div class="row">
-      <h5 class="col m-3">Order ID:</h5>
-      <h5 class="col m-3">Final Subtotal: &#x20B9</h5> <!-- you can omit this value if you want-->
-  </div>
-  <hr>
-  <div class="row">
-      <h5 class="col"><u>Pizza Name</u> [Quantity: ]</h5>
-      <h5 class="col">Price: &#x20B9 </h5>
-  </div>
-
-  <div class="row">
-      <h5 class="col">Ingredients:</h5>
+      <h5 class="col m-3">Order ID:<%= order._id %></h5>
+      <h5 class="col m-3">Mobile No.:<%= order.mobileNo %></h5> <!-- you can omit this value if you want-->
   </div>
   <hr>
+  <% order.cart.forEach(item=>{ %>
+    <div class="mt-3">
+        <div class="row">
+            <h5 class="col"><%= item.name %>[Quantity:<%= item.quantity %> ]</h5>
+            <h5 class="col">Price: &#x20B9 <%= (parseInt(item.price) * parseInt(item.quantity)) %> </h5>
+        </div>
+    
+        <div class="row">
+            <h5 class="col">Size:<%= item.size %></h5>
+        </div>
+        
+        <div class="row">
+            <h5 class="col">Toppings:
+                <% item.ingredients.forEach(topping=>{ %>
+                    <%= topping %>,
+                <% }) %>
+            </h5>
+        </div>
+    </div>
+ <% }) %>
+
+  <hr>
 
   <div class="row">
-      <h4 class="col">Grand Total (after 5% GST): &#x20B9</h4>
+      <h4 class="col">Grand Total (after 5% GST): &#x20B9 <%= order.grandTotal %> (Cash On Delivery)</h4>
   </div>
   <hr>
 
