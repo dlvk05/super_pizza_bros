@@ -10,8 +10,23 @@ mongoose.set("useUnifiedTopology", true);
 
 
 var cartflag=0;
+var grandTotal;
+var subTotal;
 var cart=[
 ];
+
+function total(){
+  grandTotal=0;
+  subTotal=0;
+  var temp=0;
+  for(var i=0;i<cart.length;i++)
+  {
+    temp= temp+ (parseInt(cart[i].quantity)*parseInt(cart[i].price))
+  }
+  subTotal=temp;
+  grandTotal=subTotal+Math.floor(subTotal*.05);
+  console.log(grandTotal);
+}
 
 console.log(cart);
 
@@ -34,7 +49,8 @@ app.get("/menu", (req, res) => {
 
 //GET CART
 app.get("/cart", (req, res) => {
-  res.render("cart",{cart:cart});
+  total();
+  res.render("cart",{cart:cart,subTotal:subTotal,grandTotal:grandTotal});
 });
 
 //Cart-add to cart
