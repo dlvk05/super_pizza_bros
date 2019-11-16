@@ -10,9 +10,37 @@
     </ol>
   </nav>
 
-  <div class="row border border-primary">
-    <h4 class="mt-3">This is your Order Invoice</h4>
+  <div class="row">
+    <h3 class="col mt-3">Thank you for eating with Super Pizza Bros!!</h3>
   </div>
+
+  <div class="row">
+      <h5 class="col m-3">Customer Name:</h5>
+      <h5 class="col m-3">Customer Address:</h5>
+  </div>
+  <div class="row">
+      <h5 class="col m-3">Order ID:</h5>
+      <h5 class="col m-3">Final Subtotal: &#x20B9</h5> <!-- you can omit this value if you want-->
+  </div>
+  <hr>
+  <div class="row">
+      <h5 class="col">Pizza Name [Quantity: ]</h5>
+      <h5 class="col">Price: &#x20B9 </h5>
+  </div>
+
+  <div class="row">
+      <h5 class="col">Ingredients:</h5>
+  </div>
+  <hr>
+
+  <div class="row">
+      <h4 class="col">Grand Total (after 5% GST): &#x20B9</h4>
+  </div>
+  <hr>
+
+  <form action="" class="row justify-content-end">
+      <button class="btn btn-danger col-2">Cancel Order</button>
+  </form>
 </div>
 
 <% include partials/footer %>
