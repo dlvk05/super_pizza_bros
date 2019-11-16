@@ -105,7 +105,9 @@
           <h5 class="col card-footer bg-transparent border-success"><%= grandTotal %></h5>
       </div>
       <div class="row">
-        <button class="col btn btn-success">Place Order</button>
+        <form action="/orderForm" class="col">
+            <button type="submit" class="col btn btn-success">Place Order</button>
+        </form>
       </div>
     </div>
 </div>
