@@ -21,21 +21,45 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
+        <div class="btn-group">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="dropdown-menu bg-primary">
+            <a class="dropdown-item bg-primary text-white" href="#">Profile</a>
+            <a class="dropdown-item bg-primary text-white" href="#"
+              >Cancel Order</a
+            >
+            <a class="dropdown-item bg-primary text-white" href="#"
+              >Order History</a
+            >
+          </div>
+        </div>
         <a class="navbar-brand" href="#">Super Pizza Bros</a>
         <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item ">
-              <a class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="/menu">Menu</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav ">
-            <li class="nav-item">
-                <a class="nav-link " href="/cart"><i class="fas fa-shopping-cart fa-2x"></i></a>
-            </li>
-          </ul>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/menu">Menu</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ">
+          <li class="nav-item">
+            <a class="nav-link " href="/cart"
+              ><i class="fas fa-shopping-cart fa-2x"></i
+            ></a>
+          </li>
+        </ul>
         <!-- </div> -->
       </div>
     </nav>
+  </body>
+</html>
