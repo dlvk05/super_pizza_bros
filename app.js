@@ -187,6 +187,11 @@ app.get("/signup", (req, res) => {
   res.render("signup");
 });
 
+//GET CANCEL ORDER FORM
+app.get("/cancelForm", (req, res) => {
+  res.render("cancelForm");
+});
+
 app.listen(3000, () => {
   console.log("server listening on port 3000");
 });
