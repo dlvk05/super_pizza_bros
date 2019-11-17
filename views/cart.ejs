@@ -41,7 +41,7 @@
           <div class="media-body mt-2">
             <div class="row">
               <h5 class="mt-0 col-10"><%= item.name %></h5>
-              <p class="col-2  ">
+              <p class="col-2  "> <!-- add the Rupee symbol &#x20B9-->
                 <%= parseInt(item.price)*parseInt(item.quantity) %>
               </p>
             </div>
@@ -89,24 +89,24 @@
     <% }) %>
   </div>
   <div class="col-3 card border-success mb-1 sticky-top" style="max-width: 18rem; max-height: 20rem;">
-      <div class="card-header bg-transparent border-success">Order Price Details</div>
+      <div class="card-header bg-transparent border-success"><h5>Order Price Details</h5></div>
       <div class="container card-body text-success">
         <div class="row">
             <p class="card-title col">Subtotal</p>
-            <p class="card-title col"><%= subTotal %></p>
+            <p class="card-title col">&#x20B9 <%= subTotal %></p>
         </div>
         <div class="row">
             <p class="card-text col">GST</p>
-            <p class="card-text col"><%= Math.floor(parseInt(subTotal*0.05)) %></p>
+            <p class="card-text col">&#x20B9 <%= Math.floor(parseInt(subTotal*0.05)) %></p>
         </div>
       </div>
       <div class="row">
           <h5 class="col card-footer bg-transparent border-success text-success">Grand Total</h5>
-          <h5 class="col card-footer bg-transparent border-success"><%= grandTotal %></h5>
+          <h5 class="col card-footer bg-transparent border-success">&#x20B9 <%= grandTotal %></h5>
       </div>
       <div class="row">
         <form action="/orderForm" class="col">
-            <button type="submit" class="col btn btn-success m-1">Place Order</button>
+            <button type="submit" class="col btn btn-success mb-2">Place Order</button>
         </form>
       </div>
     </div>
