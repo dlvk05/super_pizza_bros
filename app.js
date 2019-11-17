@@ -216,8 +216,8 @@ app.post("/invoice/cancel",(req,res)=>{
   order.findById(req.body.Id,(err,foundOrder)=>{
     if(err)
     {
-      console.log("in err")
-      res.send("notFound")
+      console.log("err")
+      res.render("orderNotFound")
     }
     else{
       console.log("found order is " + foundOrder);
