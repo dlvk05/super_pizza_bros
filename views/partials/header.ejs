@@ -32,12 +32,14 @@
             <i class="fas fa-bars"></i>
           </button>
           <div class="dropdown-menu bg-primary">
+            <% if(!(!currentUser)){ %>  <!-- //that is if user is logged in -->
             <a class="dropdown-item bg-primary text-white" href="">Profile</a>
-            <a class="dropdown-item bg-primary text-white" href="/cancelForm"
-              >Cancel Order</a
-            >
             <a class="dropdown-item bg-primary text-white" href="#"
               >Order History</a
+            >
+              <% } %>
+            <a class="dropdown-item bg-primary text-white" href="/cancelForm"
+              >Cancel Order</a
             >
           </div>
         </div>
@@ -58,15 +60,18 @@
             ></a>
           </li>
         </li>
+        <% if(!currentUser){ %>  <!-- //that is user is not signed in -->
         <li class="nav-item">
           <a href="/signup" class="nav-link">Signup  <i class="fas fa-user-plus"></i></a>
         </li>
         <li class="nav-item">
           <a href="/login" class="nav-link">Login  <i class="far fa-user"></i></a>
         </li>
+        <% } else { %>
         <li class="nav-item">
             <a href="/logout" class="nav-link">Logout  <i class="fas fa-sign-out-alt"></i></a>
           </li>
+        <% } %>  
         </ul>
         <!-- </div> -->
       </div>

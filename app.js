@@ -26,6 +26,11 @@ passport.use(new LocalStrategy(user.authenticate()));
 passport.serializeUser(user.serializeUser()); /* ###encodes the data */
 passport.deserializeUser(user.deserializeUser());   /* ###decodes the data  */ 
 
+//PASSING CURRENT USER LOGIN INFO IN ALL PAGES
+app.use((req,res,next)=>{
+    res.locals.currentUser = req.user;
+    next();
+})
 
 //GLOBAL VARIABLES
 
@@ -212,7 +217,7 @@ app.post("/invoice/cancel",(req,res)=>{
     if(err)
     {
       console.log("in err")
-      res.render("notFound")
+      res.send("notFound")
     }
     else{
       console.log("found order is " + foundOrder);
