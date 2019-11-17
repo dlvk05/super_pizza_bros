@@ -3,13 +3,31 @@ var app = require("express")(),
   bodyParser = require("body-parser"),
   pizza= require("./models/pizza"),
   order= require("./models/orderList"),
-  methodOverride = require("method-override");
+  user= require("./models/user"),
+  methodOverride = require("method-override"),
+  passport = require("passport"),
+  LocalStrategy = require("passport-local"),
+  passportLocalMongooe = require("passport-local-mongoose");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useUnifiedTopology", true);
 
+//PASSPORT CONFIGURATION
+app.use(require("express-session")({
+  secret: "This is super pizza bros",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(user.authenticate()));
+passport.serializeUser(user.serializeUser()); /* ###encodes the data */
+passport.deserializeUser(user.deserializeUser());   /* ###decodes the data  */ 
+
+
+//GLOBAL VARIABLES
 
 var cartflag=0;
 var grandTotal;
@@ -17,6 +35,8 @@ var subTotal;
 var cart=[
 ];
 var currentOrder=[];
+
+//FUNCTIONS
 
 function total(){
   grandTotal=0;
@@ -31,9 +51,16 @@ function total(){
   console.log(grandTotal);
 }
 
-console.log(cart);
+function isloggedIN(req, res, next){
+  if(req.isAuthenticated()){
+      return next();
+  }
+  res.redirect("/login");
+}
 
 // ROUTES
+
+
 app.get("/", (req, res) => {
   res.render("home");
 });
@@ -178,10 +205,10 @@ app.get("/cancelForm", (req, res) => {
 });
 
 //GET INVOICE FOR CANCELLATION REQUEST FROM CANCEL FORM
-app.get("/invoice/cancel",(req,res)=>{
+app.post("/invoice/cancel",(req,res)=>{
   var id=req.body.Id
   console.log(req.body);
-  order.findById(req.body.orderId,(err,foundOrder)=>{
+  order.findById(req.body.Id,(err,foundOrder)=>{
     if(err)
     {
       console.log("in err")
@@ -195,7 +222,7 @@ app.get("/invoice/cancel",(req,res)=>{
 });
 
 //DESTROY ROUTE- CANCEL REQUEST FROM INVOICE
-app.delete("/cancelOrder/:id",(req,res)=>{
+app.post("/cancelOrder/:id",(req,res)=>{
   order.findByIdAndRemove(req.params.id,(err,foundOrder)=>{
     if(err)
     {
@@ -212,20 +239,43 @@ app.get("/addPizza", (req, res) => {
   res.render("addPizza");
 });
 
+//GET SIGNUP FORM
+app.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
+//POST REQUEST FROM SIGNUP
+app.post("/signup",(req,res)=>{
+  var fusername = req.body.username;
+  var fpassword = req.body.password;
+  user.register(new user({username:fusername}),fpassword,(err,user)=>{
+    if(err){
+      console.log(err)
+      return res.render("signup");
+    }
+    passport.authenticate("local")(req,res,()=>{
+      return res.redirect("/");
+    })
+  });
+});
 
 //GET LOGIN FORM
 app.get("/login", (req, res) => {
   res.render("login");
 });
 
-//GET SIGNUP FORM
-app.get("/signup", (req, res) => {
-  res.render("signup");
+//POST REQUEST FROM LOGIN
+app.post("/login",passport.authenticate("local",{
+  successRedirect:"/",
+  failureRedirect:"/login",
+}),(req,res)=>{
+//empty
 });
 
-//GET CANCEL ORDER FORM
-app.get("/cancelForm", (req, res) => {
-  res.render("cancelForm");
+//LOGOUT
+app.get("/logout", function(req, res) {
+  req.logout();
+  res.render("home");
 });
 
 app.listen(3000, () => {
