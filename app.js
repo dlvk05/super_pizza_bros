@@ -2,7 +2,8 @@ var app = require("express")(),
   mongoose = require("mongoose"),
   bodyParser = require("body-parser"),
   pizza= require("./models/pizza"),
-  order= require("./models/orderList");
+  order= require("./models/orderList"),
+  methodOverride = require("method-override");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -170,6 +171,19 @@ app.get("/invoice", (req, res) => {
   console.log(currentOrder[0]);
   res.render("invoice",{order:currentOrder[0]});
 });
+
+//DESTROY ROUTE- CANCEL REQUEST 
+app.delete("/cancelOrder/:id",(req,res)=>{
+  order.findByIdAndRemove(req.params.id,(err,foundOrder)=>{
+    if(err)
+    {
+      res.redirect("/invoice");
+    }
+    else{
+       res.render("confirmCancel")
+    }
+  })
+})
 
 //GET ADD-PIZZA FORM
 app.get("/addPizza", (req, res) => {
