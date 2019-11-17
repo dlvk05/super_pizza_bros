@@ -13,22 +13,26 @@
   <h4>Please Enter Order Details</h4>
   <hr />
 
-  <form action="" class="container">
+  <form action="/invoice/cancel"  method="GET">
+    <input type="text" name="id">
+    <button type="submit">Cancel Order</button>
+  </form>
+
+  <!-- <form action="/invoice/cancel" class="container" method="GET">
     <div class="row">
       <input
         type="text"
-        name=""
+        name="Id"
         id=""
         placeholder="Enter Order ID"
         class="col form-control"
       />
     </div>
     <hr>
-
     <div class="row">
-        <button class="col-2 btn btn-danger mt-2 ml-2">Cancel Order</button>
+        <button type="submit" class="col-2 btn btn-danger mt-2 ml-2">Cancel Order</button>
     </div>
-  </form>
+  </form> -->
 
 
 
