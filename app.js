@@ -166,13 +166,35 @@ app.post("/placeOrder",(req,res)=>{
   });
 });
 
-//GET INOICE
+//GET INVOICE
 app.get("/invoice", (req, res) => {
   console.log(currentOrder[0]);
   res.render("invoice",{order:currentOrder[0]});
 });
 
-//DESTROY ROUTE- CANCEL REQUEST 
+//GET CANCEL FORM
+app.get("/cancelForm", (req, res) => {
+  res.render("cancelForm");
+});
+
+//GET INVOICE FOR CANCELLATION REQUEST FROM CANCEL FORM
+app.get("/invoice/cancel",(req,res)=>{
+  var id=req.body.Id
+  console.log(req.body);
+  order.findById(req.body.orderId,(err,foundOrder)=>{
+    if(err)
+    {
+      console.log("in err")
+      res.render("notFound")
+    }
+    else{
+      console.log("found order is " + foundOrder);
+      res.render("invoice",{order:foundOrder});
+    }
+  })
+});
+
+//DESTROY ROUTE- CANCEL REQUEST FROM INVOICE
 app.delete("/cancelOrder/:id",(req,res)=>{
   order.findByIdAndRemove(req.params.id,(err,foundOrder)=>{
     if(err)
