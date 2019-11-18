@@ -283,6 +283,12 @@ app.get("/logout", function(req, res) {
   res.render("home");
 });
 
+//PROFILE
+app.get("/profile", function(req, res) {
+  res.render("profile");
+});
+
+
 app.listen(3000, () => {
   console.log("server listening on port 3000");
 });
