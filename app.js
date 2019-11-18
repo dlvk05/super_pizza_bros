@@ -288,6 +288,9 @@ app.get("/profile", function(req, res) {
   res.render("profile");
 });
 
+app.get("/orderHistory", function(req, res) {
+  res.render("orderHistory");
+});
 
 app.listen(3000, () => {
   console.log("server listening on port 3000");
