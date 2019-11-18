@@ -4,8 +4,10 @@ var app = require("express")(),
   pizza= require("./models/pizza"),
   order= require("./models/orderList"),
   user= require("./models/user"),
+  // admin= require("./models/admin"),
   methodOverride = require("method-override"),
   passport = require("passport"),
+  passportAdmin= require("passport"),
   LocalStrategy = require("passport-local"),
   passportLocalMongooe = require("passport-local-mongoose");
 
@@ -13,6 +15,16 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useUnifiedTopology", true);
+
+//GLOBAL VARIABLES
+
+var cartflag=0;
+var grandTotal;
+var subTotal;
+var cart=[
+];
+var currentOrder=[];
+
 
 //PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -26,20 +38,23 @@ passport.use(new LocalStrategy(user.authenticate()));
 passport.serializeUser(user.serializeUser()); /* ###encodes the data */
 passport.deserializeUser(user.deserializeUser());   /* ###decodes the data  */ 
 
+//for admin as well
+// app.use(passportAdmin.initialize());
+// app.use(passportAdmin.session());
+// passportAdmin.use(new LocalStrategy(admin.authenticate()));
+// passportAdmin.serializeUser(admin.serializeUser()); /* ###encodes the data */
+// passportAdmin.deserializeUser(admin.deserializeUser());   /* ###decodes the data  */ 
+
 //PASSING CURRENT USER LOGIN INFO IN ALL PAGES
 app.use((req,res,next)=>{
     res.locals.currentUser = req.user;
+    // if(!(req.user))
+    // {
+    //   console.log(req.user.isAdmin);
+    // }
     next();
-})
+});
 
-//GLOBAL VARIABLES
-
-var cartflag=0;
-var grandTotal;
-var subTotal;
-var cart=[
-];
-var currentOrder=[];
 
 //FUNCTIONS
 
@@ -63,9 +78,16 @@ function isloggedIN(req, res, next){
   res.redirect("/login");
 }
 
+// function isAdmin(req, res, next){
+//   if(req.user.isAdmin==true){
+//     console.log("isAdmin called and is true");
+//       return next();
+//   }
+//   res.redirect("/login");
+// }
+
+
 // ROUTES
-
-
 app.get("/", (req, res) => {
   res.render("home");
 });
@@ -240,7 +262,7 @@ app.post("/cancelOrder/:id",(req,res)=>{
 })
 
 //GET ADD-PIZZA FORM
-app.get("/addPizza", (req, res) => {
+app.get("/addPizza",isloggedIN, (req, res) => {
   res.render("addPizza");
 });
 
@@ -262,6 +284,17 @@ app.post("/signup",(req,res)=>{
       return res.redirect("/");
     })
   });
+  
+  //When signup form needs to be used for admin signup uncomment bellow code and comment above code
+  // admin.register(new user({username:fusername}),fpassword,(err,user)=>{
+  //   if(err){
+  //     console.log(err)
+  //     return res.render("signup");
+  //   }
+  //   passportAdmin.authenticate("local")(req,res,()=>{
+  //     return res.redirect("/");
+  //   })
+  // });
 });
 
 //GET LOGIN FORM
@@ -274,7 +307,7 @@ app.post("/login",passport.authenticate("local",{
   successRedirect:"/",
   failureRedirect:"/login",
 }),(req,res)=>{
-//empty
+console.log("login failed")
 });
 
 //LOGOUT
