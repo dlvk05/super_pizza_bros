@@ -4,6 +4,7 @@ var app = require("express")(),
   pizza= require("./models/pizza"),
   order= require("./models/orderList"),
   user= require("./models/user"),
+  userDetail= require("./models/userDetails"),
   // admin= require("./models/admin"),
   methodOverride = require("method-override"),
   passport = require("passport"),
@@ -275,11 +276,31 @@ app.get("/signup", (req, res) => {
 app.post("/signup",(req,res)=>{
   var fusername = req.body.username;
   var fpassword = req.body.password;
+  
   user.register(new user({username:fusername}),fpassword,(err,user)=>{
     if(err){
       console.log(err)
       return res.render("signup");
     }
+
+    var newUserDetail={
+      username:fusername,
+      firstName:req.body.firstName,
+      lastName:req.body.lastName,
+      email:req.body.email,
+      mobileNo:req.body.mobileNo,
+      address:req.body.address,
+      pinCode:req.body.pinCode,
+    };
+    userDetail.create(newUserDetail,(err,newUser)=>{
+      if(err)
+      {
+        console.log(err);
+      }else{
+        console.log(newUser);
+      }
+    });
+
     passport.authenticate("local")(req,res,()=>{
       return res.redirect("/");
     })
@@ -317,18 +338,20 @@ app.get("/logout", function(req, res) {
 });
 
 //GET PROFILE PAGE
-app.get("/profile", function(req, res) {
+app.get("/profile",isloggedIN, function(req, res) {
   res.render("profile");
 });
 
-//GET ORDERHISTORY PAGE
-app.get("/orderHistory", function(req, res) {
+//GET ORDERHISTORY PAGE REQUEST FROM PROFILE PAGE
+app.get("/orderHistory",isloggedIN, function(req, res) {
   res.render("orderHistory");
 });
 
-app.get("/userDetails", function(req, res) {
+//GET USER DETAILS REQUEST FROM PROFILE PAGE
+app.get("/userDetails",isloggedIN, function(req, res) {
   res.render("userDetails");
 });
+
 
 app.listen(3000, () => {
   console.log("server listening on port 3000");
