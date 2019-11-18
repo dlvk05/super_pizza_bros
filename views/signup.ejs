@@ -11,27 +11,28 @@
         <h4 class="row mt-3">Please Enter The Details Below to Signup:</h4>
         <hr />
         <form class="container" action="/signup" method="POST">
-          <!-- <div class="row m-5">
-            <input
-              class="col form-control m-1"
-              type="text"
-              placeholder="First Name"
-            />
-            <input class="col form-control m-1" type="text" placeholder="Last Name" />
-          </div> -->
           <div class="row m-5">
             <input type="text" class="col form-control" placeholder="Username" name="username" />
           </div>
           <div class="row m-5">
-                <input type="text" class="col form-control" placeholder="Password (at least 5 characters)" name="password" />
-              </div>
-          <!-- <div class="row m-5">
-            <input type="text" class="col form-control" placeholder="Mobile Number" />
-          </div> -->
-          <!-- <div class="row m-5">
-            <input type="text" class="col-7 form-control m-1" placeholder="Address" />
-            <input type="text" class="col form-control m-1" placeholder="PIN code" />
-          </div> -->
+            <input type="text" class="col form-control" placeholder="Password (at least 5 characters)" name="password" />
+          </div>
+          <div class="row m-5">
+            <input
+              class="col form-control m-1"
+              type="text"
+              placeholder="First Name"
+              name="firstName"
+            />
+            <input class="col form-control m-1" type="text" placeholder="Last Name" name="lastName" />
+          </div>
+          <div class="row m-5">
+            <input type="text" class="col form-control" placeholder="Mobile Number" name="mobileNo"/>
+          </div>
+          <div class="row m-5">
+            <input type="text" class="col-7 form-control m-1" placeholder="Address" name="address"/>
+            <input type="text" class="col form-control m-1" placeholder="PIN code" name="pinCode"/>
+          </div>
           <hr />
           <div class="row m-5">
             <button type="submit" class="btn btn-primary">Sign Up</button>
