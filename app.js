@@ -316,7 +316,27 @@ app.get("/logout", function(req, res) {
   res.render("home");
 });
 
+//GET PROFILE PAGE
+app.get("/profile", function(req, res) {
+  res.render("profile");
+});
+
+//GET ORDERHISTORY PAGE
+app.get("/orderHistory", function(req, res) {
+  res.render("orderHistory");
+});
+
+app.get("/userDetails", function(req, res) {
+  res.render("userDetails");
+});
+
 app.listen(3000, () => {
   console.log("server listening on port 3000");
 });
 
+//###ADMIN LOGIN DETAILS
+//username1 : darklordvibhor
+//password1 : vibhoradmin
+
+//username2 : narutouzumaki
+//password1 : adminsuvansh
