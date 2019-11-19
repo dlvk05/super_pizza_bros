@@ -385,6 +385,12 @@ app.get("/userDetails",isloggedIN, function(req, res) {
 });
 
 
+//GET EDIT PROFILE PAGE
+app.get("/editProfile",isloggedIN, function(req, res) {
+  res.render("editProfile");
+});
+
+
 app.listen(3000, () => {
   console.log("server listening on port 3000");
 });
