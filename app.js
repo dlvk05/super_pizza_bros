@@ -354,7 +354,7 @@ app.get("/userDetails",isloggedIN, function(req, res) {
 
 
 //GET EDIT PROFILE PAGE
-app.get("/editProfile",function(req, res) {
+app.get("/editProfile",isloggedIN, function(req, res) {
   res.render("editProfile");
 });
 
