@@ -370,7 +370,18 @@ app.get("/orderHistory",isloggedIN, function(req, res) {
 
 //GET USER DETAILS REQUEST FROM PROFILE PAGE
 app.get("/userDetails",isloggedIN, function(req, res) {
-  res.render("userDetails");
+  var tempUsername=req.user.username;
+  userDetail.find({username:tempUsername},(err,fetchedUserDetails)=>{
+    if(err){
+      res.redirect("/profile")
+    }else{
+      // console.log("admin flag is "+isAdminFlag);
+      console.log(fetchedUserDetails[0].firstName);
+      var name= fetchedUserDetails[0].firstName + " " + fetchedUserDetails[0].lastName;
+      console.log(name);
+      res.render("userDetails",{userDetails:fetchedUserDetails[0]});
+    }
+  });
 });
 
 
