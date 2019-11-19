@@ -25,6 +25,7 @@ var subTotal;
 var cart=[
 ];
 var currentOrder=[];
+var isAdminFlag=0;
 
 
 //PASSPORT CONFIGURATION
@@ -49,6 +50,7 @@ passport.deserializeUser(user.deserializeUser());   /* ###decodes the data  */
 //PASSING CURRENT USER LOGIN INFO IN ALL PAGES
 app.use((req,res,next)=>{
     res.locals.currentUser = req.user;
+    res.locals.adminFLag = isAdminFlag;
     // if(!(req.user))
     // {
     //   console.log(req.user.isAdmin);
@@ -79,13 +81,17 @@ function isloggedIN(req, res, next){
   res.redirect("/login");
 }
 
-// function isAdmin(req, res, next){
-//   if(req.user.isAdmin==true){
-//     console.log("isAdmin called and is true");
-//       return next();
-//   }
-//   res.redirect("/login");
-// }
+function isAdmin(req, res, next){
+  if(req.isAuthenticated()){
+    if(req.user.isAdmin==true)
+    {
+      console.log("isAdmin called and is true");
+      isAdminFlag=1;
+      return next();
+    }
+  }
+  res.redirect("/login");
+}
 
 
 // ROUTES
@@ -225,6 +231,9 @@ app.post("/placeOrder",(req,res)=>{
 app.get("/invoice", (req, res) => {
   console.log(currentOrder[0]);
   res.render("invoice",{order:currentOrder[0]});
+  //for emptying cart
+  cart.length=0;
+  currentOrder.length=0;
 });
 
 //GET CANCEL FORM
@@ -263,7 +272,7 @@ app.post("/cancelOrder/:id",(req,res)=>{
 })
 
 //GET ADD-PIZZA FORM
-app.get("/addPizza",isloggedIN, (req, res) => {
+app.get("/addPizza",isAdmin, (req, res) => {
   res.render("addPizza");
 });
 
@@ -327,19 +336,31 @@ app.get("/login", (req, res) => {
 app.post("/login",passport.authenticate("local",{
   successRedirect:"/",
   failureRedirect:"/login",
-}),(req,res)=>{
+}),isAdmin,(req,res)=>{
 console.log("login failed")
 });
 
 //LOGOUT
 app.get("/logout", function(req, res) {
   req.logout();
+  isAdminFlag=0;
   res.render("home");
 });
 
 //GET PROFILE PAGE
 app.get("/profile",isloggedIN, function(req, res) {
-  res.render("profile");
+  var tempUsername=req.user.username;
+  userDetail.find({username:tempUsername},(err,fetchedUserDetails)=>{
+    if(err){
+      res.redirect("/")
+    }else{
+      // console.log("admin flag is "+isAdminFlag);
+      console.log(fetchedUserDetails[0].firstName);
+      var name= fetchedUserDetails[0].firstName + " " + fetchedUserDetails[0].lastName;
+      console.log(name);
+      res.render("profile",{name:name});
+    }
+  });
 });
 
 //GET ORDERHISTORY PAGE REQUEST FROM PROFILE PAGE
