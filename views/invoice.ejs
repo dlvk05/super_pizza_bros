@@ -1,6 +1,6 @@
 <% include partials/header %>
 
-<div class="container border border-primary">
+<div class="container border border-primary shadow">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Super Pizza Bros</a></li>
@@ -10,32 +10,34 @@
     </ol>
   </nav>
 
-  <div class="row">
-    <h3 class="col mt-3">Thank you for eating with Super Pizza Bros!!</h3>
-  </div>
 
   <div class="row">
-      <h5 class="col m-3">Customer Name:<%=order.firstName %> <%= order.lastName %></h5>
-      <h5 class="col m-3">Customer Address: <%= order.address %> </h5>
+    <h3 class="col mt-3" style="color: #0093FF;">Thank you for eating with Super Pizza Bros!!</h3>
+  </div>
+  <hr>
+
+  <div class="row">
+      <h5 class="col m-3"><span style="color: #1F618D;">Customer Name: </span><%=order.firstName %> <%= order.lastName %></h5>
+      <h5 class="col m-3"><span style="color: #1F618D;">Customer Address: </span> <%= order.address %> </h5>
   </div>
   <div class="row">
-      <h5 class="col m-3">Order ID:<%= order._id %></h5>
-      <h5 class="col m-3">Mobile No.:<%= order.mobileNo %></h5> <!-- you can omit this value if you want-->
+      <h5 class="col m-3"><span style="color: #1F618D;">Order ID: </span><%= order._id %></h5>
+      <h5 class="col m-3"><span style="color: #1F618D;">Mobile No.: </span><%= order.mobileNo %></h5> <!-- you can omit this value if you want-->
   </div>
   <hr>
   <% order.cart.forEach(item=>{ %>
     <div class="mt-3">
         <div class="row">
-            <h5 class="col"><%= item.name %>[Quantity:<%= item.quantity %> ]</h5>
+            <h5 class="col"><span style="color: #EC8E24;"><%= item.name %> </span>[Quantity:<%= item.quantity %> ]</h5>
             <h5 class="col">Price: &#x20B9 <%= (parseInt(item.price) * parseInt(item.quantity)) %> </h5>
         </div>
     
         <div class="row">
-            <h5 class="col">Size:<%= item.size %></h5>
+            <h5 class="col"><span style="color: #FF6BC9;">Size: </span><%= item.size %></h5>
         </div>
         
         <div class="row">
-            <h5 class="col">Toppings:
+            <h5 class="col"><span style="color: #00C840;">Toppings: </span> 
                 <% item.ingredients.forEach(topping=>{ %>
                     <%= topping %>,
                 <% }) %>
@@ -47,7 +49,7 @@
   <hr>
 
   <div class="row">
-      <h4 class="col">Grand Total (after 5% GST): &#x20B9 <%= order.grandTotal %> (Cash On Delivery)</h4>
+      <h4 class="col"><span style="color: #FF4444;">Grand Total (after 5% GST): </span>&#x20B9 <%= order.grandTotal %> (Cash On Delivery)</h4>
   </div>
   <hr>
 

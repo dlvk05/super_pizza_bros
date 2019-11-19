@@ -14,7 +14,7 @@
 </div>
 
 <% if(cart.length==0){ %>
-<div class="container ">
+<div class="container shadow">
   <img
     src="https://chillydraji.files.wordpress.com/2015/08/empty_cart.jpeg"
     alt=""
@@ -29,8 +29,8 @@
 <div class="row">
   <div class="col-9">
     <% cart.forEach( item=>{ %>
-    <div class="container ">
-      <div class="media mt-3 mr-5 mb-3 border border-dark">
+    <div class="container">
+      <div class="media mt-3 mr-5 mb-3 shadow">
         <img
           src="<%= item.image %>"
           class="align-self-center mr-3"
@@ -88,9 +88,9 @@
     </div>
     <% }) %>
   </div>
-  <div class="col-3 card border-success mb-1 sticky-top" style="max-width: 18rem; max-height: 20rem;">
+  <div class="col-3 card  mb-1 sticky-top shadow" style="max-width: 18rem; max-height: 20rem;">
       <div class="card-header bg-transparent border-success"><h5>Order Price Details</h5></div>
-      <div class="container card-body text-success">
+      <div class="container card-body">
         <div class="row">
             <p class="card-title col">Subtotal</p>
             <p class="card-title col">&#x20B9 <%= subTotal %></p>
@@ -102,7 +102,7 @@
       </div>
       <div class="row">
           <h5 class="col card-footer bg-transparent border-success text-success">Grand Total</h5>
-          <h5 class="col card-footer bg-transparent border-success">&#x20B9 <%= grandTotal %></h5>
+          <h5 class="col card-footer bg-transparent border-success text-success">&#x20B9 <%= grandTotal %></h5>
       </div>
       <div class="row">
         <form action="/orderForm" class="col">

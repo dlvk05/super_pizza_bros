@@ -12,10 +12,10 @@
         <hr />
         <form class="container" action="/signup" method="POST">
           <div class="row m-5">
-            <input type="text" class="col form-control" placeholder="Username" name="username" />
+            <input type="text" class="col form-control" placeholder="Username (at least 5 characters)" name="username" min="5"/>
           </div>
           <div class="row m-5">
-            <input type="text" class="col form-control" placeholder="Password (at least 5 characters)" name="password" />
+            <input type="password" class="col form-control" placeholder="Password (at least 5 characters)" name="password" min="5"/>
           </div>
           <div class="row m-5">
             <input
@@ -27,14 +27,14 @@
             <input class="col form-control m-1" type="text" placeholder="Last Name" name="lastName" />
           </div>
           <div class="row m-5">
-            <input type="text" class="col form-control" placeholder="Email" name="email" />
+            <input type="email" class="col form-control" placeholder="Email" name="email" />
           </div>
           <div class="row m-5">
-            <input type="text" class="col form-control" placeholder="Mobile Number" name="mobileNo"/>
+            <input type="text" class="col form-control" placeholder="Mobile Number" name="mobileNo" min="10"/>
           </div>
           <div class="row m-5">
             <input type="text" class="col-7 form-control m-1" placeholder="Address" name="address"/>
-            <input type="text" class="col form-control m-1" placeholder="PIN code" name="pinCode"/>
+            <input type="text" class="col form-control m-1" placeholder="PIN code" name="pinCode" min="6"/>
           </div>
           <hr />
           <div class="row m-5">
