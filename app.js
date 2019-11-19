@@ -26,6 +26,7 @@ var cart=[
 ];
 var currentOrder=[];
 var isAdminFlag=0;
+var newIngredients=[];
 
 
 //PASSPORT CONFIGURATION
@@ -151,6 +152,7 @@ app.post("/cart/:id",(req,res)=>{
           cart.push(temp);
           console.log(temp);
         }
+        res.status(204).send();//to stay on the same page
         // res.redirect("/menu");
       }
     })
@@ -284,10 +286,6 @@ app.post("/cancelOrder/:id",(req,res)=>{
   })
 })
 
-//GET ADD-PIZZA FORM
-app.get("/addPizza",isAdmin, (req, res) => {
-  res.render("addPizza");
-});
 
 //GET SIGNUP FORM
 app.get("/signup", (req, res) => {
@@ -441,6 +439,41 @@ app.post("/editProfile",isloggedIN, function(req, res) {
     }
   });
 });
+
+
+//GET ADD-PIZZA FORM
+app.get("/addPizza",isAdmin, (req, res) => {
+  res.render("addPizza");
+});
+
+//Post REQUEST FROM ADD INGREDIENTS
+app.post("/addIngredient",isAdmin, (req, res) => {
+  var tempingredient = req.body.ingredient;
+  newIngredients.push(ingredient);
+  res.status(204).send();//to stay on the same page
+});
+
+//Post REQUEST FROM ADD INGREDIENTS
+app.post("/addPizza",isAdmin, (req, res) => {
+    var newPizza={
+      name:req.body.name,
+      image:req.body.image,
+      detail:{
+        regular:req.body.regularPrice,
+        medium:req.body.mediumPrice,
+        large:req.body.largePrice,
+      },
+      ingredients:newIngredients,
+    };
+    pizza.create(newPizza,(err,Pizza)=>{
+      if(err)
+      {
+        console.log(err);
+      }else{
+        res.redirect("/menu");
+      }
+    });
+})
 
 
 app.listen(3000, () => {

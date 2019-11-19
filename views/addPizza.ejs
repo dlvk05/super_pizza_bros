@@ -3,52 +3,55 @@
 <div class="container">
         <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Super Pizza Bros</a></li>
+                  <li class="breadcrumb-item"><a href="/">Super Pizza Bros</a></li>
                   <li class="breadcrumb-item"><a href="#">Admin Controls</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Add Order</li>
+                  <li class="breadcrumb-item active" aria-current="page">Add Item</li>
                 </ol>
               </nav>
     <h4 class="row mt-3">Enter Details of the New Pizza</h4>
     <hr />
-    <form class="container">
+    <form class="container" action="/addPizza" method="post" >
         <div class="row m-3">
             <input
               class="col form-control m-1"
               type="text"
               placeholder="Pizza Name"
+              name="name"
             />
         </div>
 
         <div class="row m-5">
-            <input type="text" name="" class="col-5 form-control mr-3" placeholder="Enter Ingredient" />
-            <button class="btn btn-primary">Add</button>
-        </div> 
-
-        <div class="row m-5">
             <label class="col-1">Regular:</label>
-            <input type="text" class="col-3 form-control" placeholder="Enter Price for Regular" />
+            <input type="text" class="col-3 form-control" placeholder="Enter Price for Regular" name="regularPrice" />
         </div>    
 
         <div class="row m-5">
             <label class="col-1">Medium:</label>
-            <input type="text" class="col-3 form-control" placeholder="Enter Price for Medium" />
+            <input type="text" class="col-3 form-control" placeholder="Enter Price for Medium" name="mediumPrice" />
         </div>   
 
         <div class="row m-5">
             <label class="col-1">Large:</label>
-            <input type="text" class="col-3 form-control" placeholder="Enter Price for Large" />
+            <input type="text" class="col-3 form-control" placeholder="Enter Price for Large" name="largePrice" />
         </div>
 
         <div class="row m-5">
             <label class="col">Enter Pizza Image Link:</label>
-            <input type="text" class="col-9 form-control" />
+            <input type="text" class="col-9 form-control" name="image" />
         </div>
         <hr />
         <div class="row m-5">
-            <button class="btn btn-primary">Add New Pizza</button>
+            <button type="submit" class="btn btn-primary">Add New Pizza</button>
         </div>
-
     </form>
+
+    <form action="/addIngredient" method="post">
+        <div class="row m-5">
+                <input type="text" name="" class="col-5 form-control mr-3" placeholder="Enter Ingredient" name="ingredient" />
+                <button  class="btn btn-primary">Add</button>
+            </div> 
+    </form>
+    
 </div>
 
 
