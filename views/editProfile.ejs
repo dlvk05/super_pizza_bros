@@ -2,8 +2,8 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Super Pizza Bros</a></li>
-          <li class="breadcrumb-item"><a href="#">Profile</a></li>
+          <li class="breadcrumb-item"><a href="/">Super Pizza Bros</a></li>
+          <li class="breadcrumb-item"><a href="/profile">Profile</a></li>
           <li class="breadcrumb-item active" aria-current="page">Edit Profile Details</li>
         </ol>
       </nav>
@@ -14,28 +14,29 @@
     </div>
     <hr>
 
-    <form class="container" action="/placeOrder" method="POST">
+    <form class="container" action="/editProfile" method="POST">
       <div class="row m-5">
-        <input
+        <input required="required"
           class="col form-control m-1"
           type="text"
           placeholder="First Name" name="firstName"
+          value=" <%= userDetails.firstName %> "
         />
-        <input class="col form-control m-1" type="text" placeholder="Last Name" name="lastName"/>
+        <input required="required" class="col form-control m-1" type="text" placeholder="Last Name" name="lastName" value=" <%= userDetails.lastName %> "/>
       </div>
       <div class="row m-5">
-        <input type="email" class="col form-control" placeholder="Email" name="email" />
+        <input required="required" type="email" class="col form-control" placeholder="Email" name="email" value=" <%= userDetails.email %> " />
       </div>
       <div class="row m-5">
-        <input type="text" class="col form-control" placeholder="Mobile Number" name="mobileNo" min="10"/>
+        <input required="required" type="text" class="col form-control" placeholder="Mobile Number" name="mobileNo" value=" <%= userDetails.mobileNo %>" minlength="10" maxlength="10"/>
       </div>
       <div class="row m-5">
-        <input type="text" class="col-7 form-control m-1" placeholder="Address" name="address"/>
-        <input type="text" class="col form-control m-1" placeholder="PIN code" name="pin" min="6"/>
+        <input required="required" type="text" class="col-7 form-control m-1" placeholder="Address" name="address" value=" <%= userDetails.address %> "/>
+        <input required="required" type="text" class="col form-control m-1" placeholder="PIN code" name="pinCode" value=" <%= userDetails.pinCode %>" minlength="6"/>
       </div>
       <hr />
       <div class="row m-5">
-        <button type="submit" class="btn btn-primary">Place Order</button>
+        <button type="submit" class="btn btn-primary">Save</button>
       </div>
     </form>
 

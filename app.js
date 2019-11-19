@@ -193,7 +193,20 @@ app.post("/cart/increase/:name/:size",(req,res)=>{
 
 //GET ORDER FORM
 app.get("/orderForm", (req, res) => {
-  res.render("orderForm");
+  if(!(!req.user)){
+
+    var tempUsername=req.user.username;
+  userDetail.find({username:tempUsername},(err,fetchedUserDetails)=>{
+    if(err){
+      res.redirect("/cart")
+    }else{
+      // console.log("admin flag is "+isAdminFlag);
+      res.render("filledOrderForm",{userDetails:fetchedUserDetails[0]});
+    }
+  });
+  }else{
+    res.render("orderForm");
+  }
 });
 
 //Place order
@@ -370,13 +383,63 @@ app.get("/orderHistory",isloggedIN, function(req, res) {
 
 //GET USER DETAILS REQUEST FROM PROFILE PAGE
 app.get("/userDetails",isloggedIN, function(req, res) {
-  res.render("userDetails");
+  var tempUsername=req.user.username;
+  userDetail.find({username:tempUsername},(err,fetchedUserDetails)=>{
+    if(err){
+      res.redirect("/profile")
+    }else{
+      // console.log("admin flag is "+isAdminFlag);
+      res.render("userDetails",{userDetails:fetchedUserDetails[0]});
+    }
+  });
 });
 
 
 //GET EDIT PROFILE PAGE
 app.get("/editProfile",isloggedIN, function(req, res) {
-  res.render("editProfile");
+  var tempUsername=req.user.username;
+  userDetail.find({username:tempUsername},(err,fetchedUserDetails)=>{
+    if(err){
+      res.redirect("/profile")
+    }else{
+      // console.log("admin flag is "+isAdminFlag);
+      res.render("editProfile",{userDetails:fetchedUserDetails[0]});
+    }
+  });
+});
+
+//POST REQUEST FROM EDIT PROFILE PAGE
+app.post("/editProfile",isloggedIN, function(req, res) {
+  var tempUsername=req.user.username;
+  userDetail.find({username:tempUsername},(err,fetchedUserDetails)=>{
+    if(err){
+      res.redirect("/")
+    }else{
+      // console.log("in editprofile post");
+      var idInDatabase= fetchedUserDetails[0]._id;
+      var newDetails={
+      username:fetchedUserDetails[0].username,
+      firstName:req.body.firstName,
+      lastName:req.body.lastName,
+      email:req.body.email,
+      mobileNo:req.body.mobileNo,
+      address:req.body.address,
+      pinCode:req.body.pinCode,
+      };
+      // console.log(idInDatabase);
+        userDetail.findByIdAndUpdate(idInDatabase,newDetails,(err,updatedProfile)=>{
+          if(err){
+            console.log("in error");
+              res.redirect("/profile");
+          }
+          else{
+            res.redirect("/userDetails");
+            // console.log(updatedProfile);
+            // res.render("userDetails",{userDetails:updatedProfile});
+          }
+      });
+    }
+  });
 });
 
 

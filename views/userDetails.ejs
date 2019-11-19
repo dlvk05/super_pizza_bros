@@ -14,29 +14,30 @@
   <hr />
 
   <div class="row mt-3">
-    <h5 class="col"><u>First Name:</u> Tarak</h5>
-    <h5 class="col"><u>Last Name:</u> Mehta</h5>
+    <h5 class="col"><u>First Name:</u> <%= userDetails.firstName %> </h5>
+    <h5 class="col"><u>Last Name:</u> <%= userDetails.lastName %> </h5>
   </div>
 
   <div class="row mt-3">
-    <h5 class="col"><u>Mobile Number:</u> 123456789</h5>
+    <h5 class="col"><u>Mobile Number:</u> <%= userDetails.mobileNo %> </h5>
   </div>
 
   <div class="row mt-3">
-    <h5 class="col"><u>Email:</u> oolta@chashma.com</h5>
+    <h5 class="col"><u>Email:</u> <%= userDetails.email %> </h5>
   </div>
 
   <div class="row mt-3">
     <h5 class="col">
-      <u>Address:</u> kaibhi apartment, kuchbhi road, kahinka district, GUJ,
-      india , earth solar system
+      <u>Address:</u> <%= userDetails.address %>
     </h5>
-    <h5 class="col"><u>PIN Code:</u> 08870</h5>
+    <h5 class="col"><u>PIN Code:</u> <%= userDetails.pinCode %> </h5>
   </div>
   <hr />
 
   <div class="row justify-content-start">
-    <button class="btn btn-warning">Edit Details</button>
+    <form action="/editProfile" method="get">
+      <button class="btn btn-warning">Edit Details</button>
+    </form>
   </div>
 </div>
 
