@@ -13,18 +13,21 @@
   </div>
 
   <div class="row justify-content-center mt-1">
+    <% console.log( "from the profile page"+name) %>
       <!-- you'll need to make the below line dynamic -->
-    <div><h5>First Name Last Name</h5></div>
+    <div><h5> <%= name %>  </h5></div>
   </div>
 
   <div class="row justify-content-center mt-1">
       <!-- you'll need to make the below line dynamic -->
-    <button class="btn btn-warning">User Details</button>
+      <a href="/userDetails"class="btn btn-warning">User Details</a>
+    <!-- <button class="btn btn-warning">User Details</button> -->
   </div>
 
   <div class="row justify-content-center mt-2">
       <!-- you'll need to make the below line dynamic -->
-    <button class="btn btn-warning">Order History</button>
+      <a href="/orderHistory" class="btn btn-warning" >Order History</a>
+    <!-- <button class="btn btn-warning">Order History</button> -->
   </div>
 </div>
 
