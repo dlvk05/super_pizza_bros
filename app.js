@@ -81,7 +81,12 @@ function isloggedIN(req, res, next){
   }
   res.redirect("/login");
 }
-
+function notloggedIN(req,res,next){
+  if(req.isAuthenticated()){
+    return res.redirect("/");
+  }
+  return next();
+}
 function isAdmin(req, res, next){
   if(req.isAuthenticated()){
     if(req.user.isAdmin==true)
@@ -288,7 +293,7 @@ app.post("/cancelOrder/:id",(req,res)=>{
 
 
 //GET SIGNUP FORM
-app.get("/signup", (req, res) => {
+app.get("/signup",notloggedIN, (req, res) => {
   res.render("signup");
 });
 
@@ -339,7 +344,7 @@ app.post("/signup",(req,res)=>{
 });
 
 //GET LOGIN FORM
-app.get("/login", (req, res) => {
+app.get("/login",notloggedIN,(req, res) => {
   res.render("login");
 });
 
